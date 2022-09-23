@@ -1,8 +1,22 @@
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import PostCard from './PostCard';
 
 export function App() {
   const [data, setData] = useState<null | any>();
+
+  useEffect(() => {
+    // check for a preset subreddit.
+    // @ts-ignore
+    let params = new URL(document.location).searchParams;
+    let subReddit = params.get('redditUrl');
+
+    const getInitSubReddit = async (sr: string) => {
+      const subRedditData = await getSubRedditData(sr);
+      setData(subRedditData);
+    };
+
+    if (subReddit) getInitSubReddit(`r/${subReddit}`);
+  }, []);
 
   const submitForm = async (e: any) => {
     e.preventDefault();
@@ -11,12 +25,17 @@ export function App() {
     const formData = new FormData(e.target);
     const { subReddit } = Object.fromEntries(formData);
 
+    const subRedditData = await getSubRedditData(subReddit.toString());
+    setData(subRedditData);
+  };
+
+  const getSubRedditData = async (subReddit: string) => {
     // fetch reddit
     try {
       const url = `https://www.reddit.com/${subReddit}/.json`;
       const res = await fetch(url, { method: 'GET' });
       const data = await res.json();
-      setData(data);
+      return data;
     } catch (err) {
       console.error(err);
       alert('whoops! something went wrong');
@@ -34,7 +53,7 @@ export function App() {
           Reads you stories from reddit; just like the MineCraft videos on
           TikTok.
         </p>
-        <form action="" onSubmit={submitForm}>
+        <form onSubmit={submitForm}>
           <div className="form-control">
             <label htmlFor="subReddit">SubReddit</label>
             <input
@@ -49,7 +68,7 @@ export function App() {
         </form>
         {data ? (
           <section>
-            <h2>Posts</h2>
+            <h2>Posts from r/{data.data.children[0].data.subreddit}</h2>
             {data.data.children.map(({ data }: any) => (
               <PostCard data={data} />
             ))}
