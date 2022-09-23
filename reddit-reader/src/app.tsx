@@ -2,10 +2,9 @@ import { useState } from 'preact/hooks';
 import PostCard from './PostCard';
 
 export function App() {
-  const [url, setUrl] = useState();
-  const [data, setData] = useState();
+  const [data, setData] = useState<null | any>();
 
-  const submitForm = async (e) => {
+  const submitForm = async (e: any) => {
     e.preventDefault();
 
     // get form data
@@ -51,7 +50,7 @@ export function App() {
         {data ? (
           <section>
             <h2>Posts</h2>
-            {data.data.children.map(({ data }) => (
+            {data.data.children.map(({ data }: any) => (
               <PostCard data={data} />
             ))}
           </section>

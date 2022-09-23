@@ -1,7 +1,11 @@
-const PostCard = ({ data }) => {
+type PostCardProps = {
+  data: any
+}
+
+const PostCard = ({ data }: PostCardProps) => {
   const { title, score, url, selftext } = data;
 
-  const readPost = async (e) => {
+  const readPost = async (e: any) => {
     e.preventDefault();
     // ! commented out as it seems like all I need is in the initial fetch
     // get post specific data
