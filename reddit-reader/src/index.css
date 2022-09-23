@@ -6,7 +6,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--gray-9);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,26 +15,68 @@
   -webkit-text-size-adjust: 100%;
 }
 
+* {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-1);
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: var(--font-size-5);
+}
+
+h2 {
+  font-size: var(--font-size-4);
+}
+
+h3 {
+  font-size: var(--font-size-3);
+}
+
+/* compositions */
+.site-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr minmax(auto, 80ch) 1fr;
+}
+
+.container {
+  grid-column-start: 2;
+  padding: var(--size-3) var(--size-2);
+}
+
+.container--wide {
+  grid-column: span 3;
+}
+
+.container--wide__centered {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container--wide__centered > * {
+  width: 100%;
+  max-width: 80ch;
+  padding: var(--size-2);
+}
+
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
 }
 
 button {
@@ -44,16 +86,27 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--indigo-6);
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
+
+.btn--secondary {
+  background: var(--gray-8);
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+.btn--secondary:hover{
+  border-color: var(--gray-7);
+}
+
+button:hover {
+  border-color: var(--indigo-4);
+}
+
+:is(button, input, select, textarea):focus,
+:is(button, input, select, textarea):focus-visible {
+  outline: var(--indigo-3) solid 2px;
+  outline-offset: 3px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -67,4 +120,47 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* form resets */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+}
+
+form .form-control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+}
+
+input,
+textarea,
+select {
+  font-size: var(--font-size-base);
+  padding: var(--size-3) var(--size-2);
+  border: 1px solid var(--gray-6);
+  border-radius: var(--radius-2);
+}
+
+section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--size-3);
+}
+
+article.post-card {
+  border: 1px solid var(--gray-7);
+  border-radius: var(--radius-2);
+  background: var(--gray-9);
+  padding: var(--size-3);
+  box-shadow: 0 12px 50px -12px rgb(0 0 0 / 0.75);
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+}
+
+article.post-card p {
+  margin: 0;
 }
