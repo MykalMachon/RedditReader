@@ -8,7 +8,7 @@ export function App() {
     // check for a preset subreddit.
     // @ts-ignore
     let params = new URL(document.location).searchParams;
-    let subReddit = params.get('redditUrl');
+    let subReddit = params.get('subreddit');
 
     const getInitSubReddit = async (sr: string) => {
       const subRedditData = await getSubRedditData(sr);
