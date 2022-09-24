@@ -1,2 +1,6 @@
 # RedditReader
-Reads you reddit stories via text-to-speech
+> ⚠️This is something I threw together in an afternoon; I'll likely refactor to improve UI/UX and code quality.
+
+Reddit Reader is a simple text to speech (tts) application that allows you to have your browser read you reddit posts. You do this by looking up your favourite subreddits and then selecting an post that interests you. 
+
+This application was inspired by those TikTok videos a TTS bot reads popular reddit posts and overlays the audio on recorded gameplay. 
