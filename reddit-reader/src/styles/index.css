@@ -45,7 +45,7 @@ html {
 
 .container {
   grid-column-start: 2;
-  padding: var(--size-3) var(--size-2);
+  padding: var(--size-3);
 }
 
 .container--wide {
@@ -63,7 +63,7 @@ html {
 .container--wide__centered > * {
   width: 100%;
   max-width: 80ch;
-  padding: var(--size-2);
+  padding: var(--size-3);
 }
 
 a {
