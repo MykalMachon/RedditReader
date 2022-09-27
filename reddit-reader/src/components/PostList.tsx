@@ -1,21 +1,29 @@
 import PostCard from './PostCard';
+import { useSubReddit } from './SubRedditContext';
 
-type PostListProps = {
-  posts: Array<any>;
-};
+const PostList = () => {
+  const [state] = useSubReddit();
 
-const PostList = ({ posts }: PostListProps) => {
   return (
     <section className="post-list">
-      <h2>Posts</h2>
-      {posts.length > 0 ? (
-        <>
-          {posts.map((post) => (
-            <PostCard data={post.data} />
-          ))}
-        </>
+      {state.subRedditData === null ? (
+        <p>Select a subreddit above</p>
       ) : (
-        <p>there are no posts yet</p>
+        <>
+          <h2>
+            Posts from r/
+            {state.subRedditData && state.subRedditData[0].data.subreddit}
+          </h2>
+          {state.subRedditData.length > 0 ? (
+            <>
+              {state.subRedditData.map((post: any) => (
+                <PostCard data={post.data} />
+              ))}
+            </>
+          ) : (
+            <p>there are no posts in this SubReddit.</p>
+          )}
+        </>
       )}
     </section>
   );

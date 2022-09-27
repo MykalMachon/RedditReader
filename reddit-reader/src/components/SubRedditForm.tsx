@@ -1,4 +1,5 @@
 import { useEffect } from 'preact/hooks';
+import { useSubReddit } from './SubRedditContext';
 
 const getSubRedditData = async (subReddit: string) => {
   // fetch reddit
@@ -13,11 +14,9 @@ const getSubRedditData = async (subReddit: string) => {
   }
 };
 
-type SubRedditFormProps = {
-  setData: Function;
-};
+const SubRedditForm = () => {
+  const [state, dispatch] = useSubReddit();
 
-const SubRedditForm = ({ setData }: SubRedditFormProps) => {
   useEffect(() => {
     // check for a preset subreddit.
     // @ts-ignore
@@ -25,8 +24,15 @@ const SubRedditForm = ({ setData }: SubRedditFormProps) => {
     let subReddit = params.get('subreddit');
 
     const getInitSubReddit = async (sr: string) => {
+      dispatch({ type: 'sr-fetch' });
       const subRedditData = await getSubRedditData(sr);
-      setData(subRedditData);
+      dispatch({
+        type: 'sr-loaded',
+        data: {
+          posts: subRedditData.data.children,
+          subReddit,
+        },
+      });
     };
 
     if (subReddit) getInitSubReddit(`r/${subReddit}`);
@@ -40,8 +46,15 @@ const SubRedditForm = ({ setData }: SubRedditFormProps) => {
     const { subReddit } = Object.fromEntries(formData);
 
     // set form data in state
+    dispatch({ type: 'sr-fetch' });
     const subRedditData = await getSubRedditData(subReddit.toString());
-    setData(subRedditData);
+    dispatch({
+      type: 'sr-loaded',
+      data: {
+        posts: subRedditData.data.children,
+        subReddit,
+      },
+    });
   };
 
   return (
@@ -56,7 +69,9 @@ const SubRedditForm = ({ setData }: SubRedditFormProps) => {
           required={true}
         />
       </div>
-      <button type="submit">Get posts</button>
+      <button type="submit" disabled={state.state !== 'idle'}>
+        {state.state === 'idle' ? <>get posts</> : <>getting posts...</>}
+      </button>
     </form>
   );
 };
