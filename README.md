@@ -1,4 +1,4 @@
-# RedditReader
+# Reddit Reader
 > ⚠️
 > 
 > This is something I threw together in an afternoon; If I actually use it regularly, I'll likely refactor to improve UI/UX and code quality.
