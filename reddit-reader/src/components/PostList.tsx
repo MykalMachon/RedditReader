@@ -12,7 +12,8 @@ const PostList = () => {
         <>
           <h2>
             Posts from r/
-            {state.subRedditData && state.subRedditData[0].data.subreddit}
+            {state.subRedditData.length &&
+              state.subRedditData[0].data.subreddit}
           </h2>
           {state.subRedditData.length > 0 ? (
             <>
