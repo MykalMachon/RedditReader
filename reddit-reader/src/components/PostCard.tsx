@@ -27,6 +27,9 @@ const PostCard = ({ data }: PostCardProps) => {
       <button className="btn--secondary" onClick={readPost}>
         read-it
       </button>
+      <p>
+        <a href={url}>see the post</a>
+      </p>
     </article>
   );
 };
