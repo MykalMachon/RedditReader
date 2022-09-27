@@ -6,14 +6,13 @@ const PostList = () => {
 
   return (
     <section className="post-list">
-      {state.state === 'idle' && !state.subRedditData ? (
+      {state.subRedditData === null ? (
         <p>Select a subreddit above</p>
       ) : (
         <>
           <h2>
             Posts from r/
-            {state.subRedditData.length &&
-              state.subRedditData[0].data.subreddit}
+            {state.subRedditData && state.subRedditData[0].data.subreddit}
           </h2>
           {state.subRedditData.length > 0 ? (
             <>
