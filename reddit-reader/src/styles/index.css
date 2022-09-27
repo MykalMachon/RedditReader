@@ -6,7 +6,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: var(--gray-9);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -31,6 +30,10 @@ h2 {
 
 h3 {
   font-size: var(--font-size-3);
+}
+
+html {
+  background: #16181b;
 }
 
 /* compositions */
@@ -95,7 +98,7 @@ button {
   background: var(--gray-8);
 }
 
-.btn--secondary:hover{
+.btn--secondary:hover {
   border-color: var(--gray-7);
 }
 
@@ -147,18 +150,48 @@ select {
 section {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--size-3);
 }
 
 article.post-card {
   border: 1px solid var(--gray-7);
-  border-radius: var(--radius-2);
+  border-top: none;
   background: var(--gray-9);
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--size-3);
+}
+
+article.post-card:first-of-type {
+  border-top-left-radius: var(--radius-2);
+  border-top-right-radius: var(--radius-2);
+  border-top: 1px solid var(--gray-7);
+}
+
+article.post-card .post-card__score {
+  background: var(--gray-8);
+  color: var(--gray-1);
+  display: grid;
+  place-items: center;
   padding: var(--size-3);
-  box-shadow: 0 12px 50px -12px rgb(0 0 0 / 0.75);
+}
+
+article.post-card .post-card__content {
+  padding: var(--size-3);
   display: flex;
   flex-direction: column;
   gap: var(--size-3);
+}
+
+article.post-card .post-card__content small {
+  font-style: italic;
+}
+
+div.action-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--size-3);
+  flex-wrap: wrap;
 }
 
 article.post-card p {

@@ -19,17 +19,19 @@ const PostCard = ({ data }: PostCardProps) => {
 
   return (
     <article className="post-card">
-      <p>{title}</p>
-      <small>
-        ~{Math.floor(selftext.split(' ').length / 100)} minute listen,
-        {score} up-votes
-      </small>
-      <button className="btn--secondary" onClick={readPost}>
-        read-it
-      </button>
-      <p>
-        <a href={url}>see the post</a>
-      </p>
+      <div className="post-card__score">{score}</div>
+      <div className="post-card__content">
+        <p>{title}</p>
+        <small>
+          ~{Math.floor(selftext.split(' ').length / 100)} minute listen
+        </small>
+        <div className="action-bar">
+          <button className="btn--secondary" onClick={readPost}>
+            read to me
+          </button>
+          <a href={url}>see the post</a>
+        </div>
+      </div>
     </article>
   );
 };

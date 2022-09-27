@@ -22,8 +22,6 @@ const initState: SRCState = {
   state: 'idle',
 };
 
-const SubRedditContext = createContext(initState);
-
 const SRCReducer = (state: SRCState, action: SRCAction): SRCState => {
   switch (action.type) {
     // for loading new data
@@ -46,10 +44,13 @@ const SRCReducer = (state: SRCState, action: SRCAction): SRCState => {
   }
 };
 
+const SubRedditContext = createContext([initState, () => {}]);
+
 export const SubRedditContextProvider = ({ children }: SRCProviderProps) => {
   const [state, dispatch] = useReducer(SRCReducer, initState);
 
   return (
+    // @ts-ignore TODO fix this
     <SubRedditContext.Provider value={[state, dispatch]}>
       {children}
     </SubRedditContext.Provider>
@@ -57,6 +58,7 @@ export const SubRedditContextProvider = ({ children }: SRCProviderProps) => {
 };
 
 export const useSubReddit = () => {
+  // @ts-ignore TODO fix this
   const [state, dispatch] = useContext<SRCState>(SubRedditContext);
   return [state, dispatch];
 };
